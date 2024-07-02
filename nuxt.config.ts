@@ -1,9 +1,19 @@
-
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import * as fs from "node:fs";
+import * as path from "node:path";
+
+const SSL_CERT = process.env.NUXT_NITRO_SSL_CERT;
+const SSL_KEY = process.env.NUXT_NITRO_SSL_KEY;
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@vite-pwa/nuxt"],
+  devServer: {
+    https: SSL_CERT && SSL_KEY ? {
+      key: fs.readFileSync(path.resolve(__dirname, SSL_KEY)).toString(),
+      cert: fs.readFileSync(path.resolve(__dirname, SSL_CERT)).toString()
+    } : {}
+  },
   pwa: {
     registerType: 'autoUpdate',
     manifest: {
