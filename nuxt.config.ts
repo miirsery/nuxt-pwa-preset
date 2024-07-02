@@ -10,8 +10,8 @@ export default defineNuxtConfig({
   modules: ["@vite-pwa/nuxt"],
   devServer: {
     https: SSL_CERT && SSL_KEY ? {
-      key: fs.readFileSync(path.resolve(__dirname, SSL_CERT)).toString(),
-      cert: fs.readFileSync(path.resolve(__dirname, SSL_KEY)).toString()
+      key: fs.readFileSync(path.resolve(__dirname, SSL_KEY)).toString(),
+      cert: fs.readFileSync(path.resolve(__dirname, SSL_CERT)).toString()
     } : {}
   },
   pwa: {
